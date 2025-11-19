@@ -1,8 +1,8 @@
 type: pipeline-template
 version: 1
 
-name: Spring Boot Gradle Template
-description: Spring Boot Gradle Template
+name: Spring Boot Gradle Template 1
+description: Spring Boot Gradle Template 1
 parameters:
   - name: previewEnvHostname
     displayName: Preview env hostname
