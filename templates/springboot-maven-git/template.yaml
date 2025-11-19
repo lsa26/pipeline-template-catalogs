@@ -1,8 +1,8 @@
 type: pipeline-template
 version: 1
 
-name: Spring Boot Gradle Git Pipeline
-description: Spring Boot Gradle Git Pipeline
+name: Spring Boot Maven Git Pipeline
+description: Spring Boot Maven Git Pipeline
 parameters:
   - name: repoUrl
     type: string
