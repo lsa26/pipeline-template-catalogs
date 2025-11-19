@@ -1,8 +1,8 @@
 type: pipeline-template
 version: 1
 
-name: Quarkus Maven Template
-description: Quarkus Maven Template
+name: Quarkus Maven Template 1
+description: Quarkus Maven Template 1
 parameters:
   - name: previewEnvHostname
     displayName: Preview env hostname
