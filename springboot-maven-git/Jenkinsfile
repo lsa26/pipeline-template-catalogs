@@ -1,0 +1,36 @@
+pipeline {
+    agent {
+        label 'maven'
+    }
+
+    options {
+    durabilityHint("PERFORMANCE_OPTIMIZED")
+    timeout(time: 3, unit: "DAYS")
+    disableConcurrentBuilds()
+    skipDefaultCheckout true
+    }
+
+    
+    stages {
+        stage('Checkout') {
+          steps {
+            checkout([$class: "GitSCM", 
+              branches: [[name: "${branchName}"]], 
+              doGenerateSubmoduleConfigurations: false, 
+              extensions: [], 
+              submoduleCfg: [], 
+              userRemoteConfigs: [[credentialsId: "${gitCredentials}", url: "${repoUrl}"]]]
+            )
+          }
+        }
+        
+        stage('Build') {
+            steps {
+                container('maven') {
+                    sh 'mvn clean install -DskipTests'
+                }
+            }
+        }
+       
+    }
+}
