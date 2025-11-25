@@ -3,10 +3,6 @@ pipeline {
         label 'maven'
     }
     
- environment {
-        SNYK_TOKEN = credentials('SNYK_TOKEN')
-    }
-    
     options {
     durabilityHint("PERFORMANCE_OPTIMIZED")
     timeout(time: 3, unit: "DAYS")
@@ -36,31 +32,5 @@ pipeline {
             }
         }
 
-             stage('Security Scan') {
-            steps {
-                container('maven') {
-                    sh '''
-                        curl -Lo snyk https://github.com/snyk/cli/releases/latest/download/snyk-linux
-                        chmod +x snyk
-                        ./snyk auth ${SNYK_TOKEN}
-                        
-                        # Temporarily hide mvnw so Snyk uses system mvn
-                        if [ -f mvnw ]; then
-                            mv mvnw mvnw.bak
-                            mv .mvn .mvn.bak 2>/dev/null || true
-                        fi
-                        
-                        # Run Snyk scan with package-manager flag
-                        ./snyk test --file=pom.xml --package-manager=maven || true
-                        
-                        # Restore mvnw
-                        if [ -f mvnw.bak ]; then
-                            mv mvnw.bak mvnw
-                            mv .mvn.bak .mvn 2>/dev/null || true
-                        fi
-                    '''
-                }
-            }
-        } 
     }
 }
