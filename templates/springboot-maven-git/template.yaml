@@ -14,6 +14,3 @@ parameters:
   - name: gitCredentials
     displayName: Git Credentials
     type: credentials
-  - name: DASH
-    displayName: DASH
-    type: string
